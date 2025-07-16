@@ -1,99 +1,159 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# 🏫 Campus Service Backend (NestJS + MySQL)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+一个基于 NestJS 框架构建的校园服务后台系统，已实现用户注册、登录、角色管理、JWT 鉴权、统一响应等核心功能。
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ 项目功能（已完成）
 
-## Project setup
+- ✅ 用户注册接口（/users/register）
+- ✅ 用户登录接口（/users/login）
+- ✅ 密码加密存储（bcrypt）
+- ✅ JWT 鉴权与策略
+- ✅ 支持角色管理（admin、teacher、staff...）
+- ✅ 使用 TypeORM 操作 MySQL
+- ✅ 全局统一响应格式（含 code / message / data）
+- ✅ 自定义错误码系统
+- ✅ 接口守卫保护（@UseGuards(JwtAuthGuard)）
 
-```bash
-$ npm install
+---
+
+## 🛠️ 技术栈
+
+- NestJS
+- TypeORM
+- MySQL
+- JWT（@nestjs/jwt）
+- bcrypt
+- class-validator
+- Passport
+- dotenv
+
+---
+
+## ⚙️ 环境配置
+
+创建 `.env` 文件（或拷贝 `.env.example`）：
+
+```env
+# JWT配置
+JWT_SECRET=your_super_secure_jwt_secret_key
+JWT_EXPIRES_IN=7d
+
+# 数据库配置
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=your_mysql_password
+DB_DATABASE=campus_service
 ```
 
-## Compile and run the project
+---
+
+## 🚀 启动项目
 
 ```bash
-# development
-$ npm run start
+# 安装依赖
+npm install
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# 启动开发环境
+npm run start:dev
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+## 📦 接口说明
 
-# e2e tests
-$ npm run test:e2e
+### 用户注册
 
-# test coverage
-$ npm run test:cov
+```
+POST /users/register
 ```
 
-## Deployment
+#### 请求体：
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
+```json
+{
+  "name": "张三",
+  "email": "zhangsan@example.com",
+  "password": "123456",
+  "roleId": 12
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+### 用户登录
 
-Check out a few resources that may come in handy when working with NestJS:
+```
+POST /users/login
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### 请求体：
 
-## Support
+```json
+{
+  "email": "zhangsan@example.com",
+  "password": "123456"
+}
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### 返回示例：
 
-## Stay in touch
+```json
+{
+  "code": 200,
+  "message": "请求成功",
+  "data": {
+    "accessToken": "xxxxx.yyyyy.zzzzz",
+    "user": {
+      "id": 1,
+      "email": "zhangsan@example.com",
+      "role": {
+        "name": "admin"
+      }
+    }
+  }
+}
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+### 获取当前登录用户信息（受保护）
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+GET /users/me
+Authorization: Bearer <accessToken>
+```
+
+---
+
+## 🧩 接下来计划实现的功能（To Do）
+
+- [ ] RBAC 权限控制：@Roles() + RolesGuard
+- [ ] Swagger 接口文档自动生成
+- [ ] 用户管理：列表、详情、更新
+- [ ] 登出 / Token 黑名单机制（可选）
+- [ ] 接口权限与模块权限结构设计
+
+---
+
+## 📁 项目结构（简要）
+
+```
+src/
+│
+├── auth/              # 鉴权模块（登录、JWT、策略）
+├── users/             # 用户模块（注册、用户信息）
+├── roles/             # 角色模块（增删改查）
+├── common/            # 通用模块（拦截器、常量、错误码等）
+├── app.module.ts      # 主模块
+├── main.ts            # 项目入口
+```
+
+---
+
+## 📄 License
+
+MIT License © 2025 Jiading Wu
