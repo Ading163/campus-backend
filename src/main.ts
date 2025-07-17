@@ -2,7 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
-
+console.log('当前环境：', process.env.NODE_ENV);
+console.log('JWT_SECRET =', process.env.JWT_SECRET);
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
